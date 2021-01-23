@@ -1,0 +1,183 @@
+{
+	"info": {
+		"_postman_id": "747c1010-28dd-4f03-a9b3-b31f96935efe",
+		"name": "PostmanTutorial",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Day1",
+			"item": [
+				{
+					"name": "Login request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var res=pm.response.json();\r",
+									"var Token=res.data.token;\r",
+									"console.log(Token);\r",
+									"pm.globals.set(\"Tokenvalue\",Token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n\"email\": \"jatinvsharma@gmail.com\",\r\n\"password\": \"123123123\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://139.59.91.96:3000/user/signin",
+							"protocol": "http",
+							"host": [
+								"139",
+								"59",
+								"91",
+								"96"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddProuctApi Request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var productID=pm.response.json().data.id;\r",
+									"pm.globals.set(\"productID\",productID);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Tokenvalue}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n\"prod_name\": \"iphone11\",\r\n\"prod_desc\": \"apple2020\",\r\n\"prod_price\": 35000\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://139.59.91.96:3000/api/v1/products",
+							"protocol": "http",
+							"host": [
+								"139",
+								"59",
+								"91",
+								"96"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SearchProduct",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsYXN0X21vZGlmaWVkIjoxNjExMjczMjQxMzUyLCJleHBpcmVfYXQiOjE2MTY0NTcyNDEzNTIsInBheWxvYWQiOnsiaWQiOjIsIm5hbWUiOiJKYXRpbiBTaGFybWEiLCJlbWFpbCI6ImphdGludnNoYXJtYUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJtb2JpbGVfbnVtYmVyIjoiMTIzMTIzMTIzMSJ9fQ.syRcPu3wUgqgdyjJwmdlH0CYKbmKO2AUxzUPTuHy6UQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://139.59.91.96:3000/api/v1/products/13805",
+							"protocol": "http",
+							"host": [
+								"139",
+								"59",
+								"91",
+								"96"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"13805"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Updateapirequest",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsYXN0X21vZGlmaWVkIjoxNjExMjczMjQxMzUyLCJleHBpcmVfYXQiOjE2MTY0NTcyNDEzNTIsInBheWxvYWQiOnsiaWQiOjIsIm5hbWUiOiJKYXRpbiBTaGFybWEiLCJlbWFpbCI6ImphdGludnNoYXJtYUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJtb2JpbGVfbnVtYmVyIjoiMTIzMTIzMTIzMSJ9fQ.syRcPu3wUgqgdyjJwmdlH0CYKbmKO2AUxzUPTuHy6UQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n\"prod_name\": \"iphone11 pro\",\r\n\"prod_desc\": \"apple2021\",\r\n\"prod_price\": 65000\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://139.59.91.96:3000/api/v1/products/{{productID}}",
+							"protocol": "http",
+							"host": [
+								"139",
+								"59",
+								"91",
+								"96"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"{{productID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
